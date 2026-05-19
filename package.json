@@ -1,0 +1,28 @@
+{
+  "name": "cse340-new",
+  "version": "1.0.0",
+  "description": "npm install <pkg>",
+  "homepage": "https://github.com/Malikantsi/CSE340-new#readme",
+  "bugs": {
+    "url": "https://github.com/Malikantsi/CSE340-new/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Malikantsi/CSE340-new.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "dev": "nodemon",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "ejs": "^5.0.2",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
