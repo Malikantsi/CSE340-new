@@ -47,11 +47,9 @@ app.get('/organizations', async (req, res) => {
 });
 
 app.get('/projects', async (req, res) => {
-
-    const projects = await getAllProjects()
-
-    console.log(projects)
-
+    console.log('Server.js: Line 50')
+  const projects = await getAllProjects()
+  console.log(projects)
     const title = 'Service Projects'
 
     res.render('projects', {
