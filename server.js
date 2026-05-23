@@ -5,6 +5,7 @@ import { testConnection } from './src/models/db.js';
 import { getAllOrganizations } from './src/models/organizations.js';
 import { getAllProjects } from "./src/models/projects.js"
 import db from './src/models/db.js';
+import { getAllCategories } from './src/models/categories.js'
 
 
 // Define the the application environment
@@ -61,8 +62,15 @@ app.get('/projects', async (req, res) => {
 
 
 app.get('/categories', async (req, res) => {
-  const title = 'Explore the different types of service projects available';
-  res.render('categories', { title })
+
+    const categories = await getAllCategories();
+
+    console.log(categories);
+
+    res.render('categories', {
+        title: 'Service Project Categories',
+        categories
+    });
 });
 
 app.listen(PORT, async () => {
