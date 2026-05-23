@@ -18,8 +18,8 @@ export const getAllProjects = async () => {
             ORDER BY service_projects.project_date;
         `
         
-        const result = await db.query(query)
-        return result.rows
+        const result = await db.query(query);
+        return result.rows;
         
     } catch (error) {
         console.error('Error in getAllProjects:', error.message)
