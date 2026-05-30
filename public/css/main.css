@@ -23,7 +23,7 @@ body {
 header {
     background-color: #0f172a;
     padding: 1rem 2rem;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 /* ===== NAVIGATION ===== */
@@ -37,7 +37,7 @@ nav ul {
 }
 
 nav a {
-    color: #1f2937;
+    color: #0f172a;
     text-decoration: none;
     font-weight: 600;
     transition: color 0.3s ease;
@@ -52,41 +52,45 @@ nav a:focus {
 main {
     width: 90%;
     max-width: 1100px;
-    margin: 3rem auto;
-    background-color: #ffffff;
+    margin: 2rem auto;
+    background-color: white;
     padding: 3rem;
     border-radius: 14px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
     flex: 1;
 }
 
 /* ===== HEADINGS ===== */
 h1 {
-    font-size: 2.5rem;
+    text-align: center;
     color: #0f172a;
     margin-bottom: 1rem;
-    text-align: center;
+    font-size: 2.5rem;
 }
 
 h2 {
-    font-size: 1.5rem;
+    text-align: center;
     color: #334155;
     margin-bottom: 1rem;
-    text-align: center;
+    font-size: 1.7rem;
+}
+
+h3 {
+    color: #0f172a;
+    margin: 2rem 0 1rem;
 }
 
 /* ===== PARAGRAPHS ===== */
 p {
-    margin-bottom: 1.5rem;
-    font-size: 1.05rem;
-    text-align: center;
+    margin-bottom: 1rem;
 }
 
-/* ===== LOGO IMAGE ===== */
-.main-logo {
+/* ===== LOGO ===== */
+.main-logo,
+.organization-logo {
     display: block;
+    max-width: 300px;
     width: 100%;
-    max-width: 400px;
     margin: 2rem auto;
 }
 
@@ -96,31 +100,132 @@ ul {
     padding: 0;
 }
 
+/* ===== ORGANIZATION / PROJECT CARDS ===== */
 li {
-    background-color: #f8fafc;
-    margin-bottom: 1rem;
-    padding: 1rem;
-    border-radius: 10px;
     display: flex;
     align-items: center;
     gap: 1rem;
+    background-color: #f8fafc;
     border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    transition: transform .2s ease,
+        box-shadow .2s ease;
+}
+
+li:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .08);
 }
 
 /* ===== ORGANIZATION IMAGES ===== */
 li img {
-    width: 60px;
-    height: 60px;
+    width: 70px;
+    height: 70px;
     object-fit: contain;
+    flex-shrink: 0;
 }
 
 /* ===== LINKS ===== */
 a {
     color: #2563eb;
+    text-decoration: none;
+    font-weight: 500;
 }
 
 a:hover {
     text-decoration: underline;
+}
+
+/* ===== ORGANIZATION DETAILS PAGE ===== */
+.organization-details {
+    text-align: center;
+}
+
+.organization-details img {
+    max-width: 180px;
+    margin: 1rem auto;
+    display: block;
+}
+
+.organization-details p {
+    text-align: left;
+}
+
+/* ===== PROJECT DETAILS ===== */
+.project-details {
+    margin-top: 1.5rem;
+}
+
+.project-details p {
+    margin-bottom: .8rem;
+}
+
+.project-meta {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.project-meta div {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+/* ===== CATEGORY TAGS ===== */
+.category-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .75rem;
+    margin-top: 1rem;
+}
+
+.category-tag {
+    display: inline-block;
+    background-color: #dbeafe;
+    color: #1d4ed8;
+    padding: .45rem .9rem;
+    border-radius: 999px;
+    font-size: .9rem;
+    font-weight: 600;
+    transition: all .2s ease;
+}
+
+.category-tag:hover,
+.category-tag:focus {
+    background-color: #2563eb;
+    color: white;
+    text-decoration: none;
+}
+
+/* ===== CATEGORY PAGE ===== */
+.category-projects li {
+    justify-content: flex-start;
+}
+
+/* ===== BUTTON LINKS ===== */
+.button-link {
+    display: inline-block;
+    background-color: #2563eb;
+    color: white;
+    padding: .75rem 1.25rem;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.button-link:hover {
+    background-color: #1d4ed8;
+    text-decoration: none;
+}
+
+/* ===== ACCESSIBILITY ===== */
+a:focus {
+    outline: 3px solid #38bdf8;
+    outline-offset: 3px;
 }
 
 /* ===== FOOTER ===== */
@@ -132,11 +237,11 @@ footer {
     margin-top: auto;
 }
 
-/* ===== RESPONSIVE DESIGN ===== */
+/* ===== MOBILE ===== */
 @media (max-width: 768px) {
 
     main {
-        padding: 2rem;
+        padding: 1.5rem;
     }
 
     nav ul {
@@ -149,7 +254,7 @@ footer {
     }
 
     h2 {
-        font-size: 1.3rem;
+        font-size: 1.4rem;
     }
 
     li {
@@ -158,7 +263,15 @@ footer {
     }
 
     li img {
-        width: 80px;
-        height: 80px;
+        width: 90px;
+        height: 90px;
+    }
+
+    .project-meta {
+        grid-template-columns: 1fr;
+    }
+
+    .category-tags {
+        justify-content: center;
     }
 }
