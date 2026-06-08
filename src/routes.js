@@ -6,7 +6,9 @@ import {
     showProjectDetailsPage,
     processNewProjectForm,
     showNewProjectForm,
-    projectValidation 
+    projectValidation, 
+    showEditProjectForm,
+    processEditProjectForm
 } from './controllers/projects.js';
 import {
     showCategoriesPage,
@@ -48,6 +50,11 @@ router.post('/edit-organization/:id', organizationValidation, processEditOrganiz
 router.post('/new-organization', organizationValidation, processNewOrganizationForm);
 // Route for organization details page
 router.get('/organization/:id', showOrganizationDetailsPage);
+
+router.get('/edit-project/:id',showEditProjectForm);
+
+router.post('/edit-project/:id',projectValidation,processEditProjectForm
+);
 
 // error-handling routes
 router.get('/test-error', testErrorPage);

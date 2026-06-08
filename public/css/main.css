@@ -310,7 +310,7 @@ input[type="reset"]:focus {
 
 
 
-/* Flash message styles */
+/* Flash message styles
 .alert {
     padding: 15px;
     margin-bottom: 20px;
@@ -340,7 +340,7 @@ input[type="reset"]:focus {
     color: #0c5460;
     background-color: #d1ecf1;
     border-color: #bee5eb;
-}
+} */
 
 
 /* ===== BUTTON GROUP ===== */
@@ -356,6 +356,111 @@ a:focus {
     outline: 3px solid #38bdf8;
     outline-offset: 3px;
 }
+
+
+/* ===== EDIT PROJECT PAGE ===== */
+.edit-project-form {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.edit-project-form h2 {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+/* ===== ASSIGN CATEGORIES PAGE ===== */
+.category-checkboxes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.category-checkboxes div {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.category-checkboxes div:hover {
+    border-color: #2563eb;
+    background-color: #eff6ff;
+}
+
+.category-checkboxes input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+    cursor: pointer;
+}
+
+.category-checkboxes label {
+    margin: 0;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+/* ===== CATEGORY ASSIGNMENT BUTTONS ===== */
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+/* ===== IMPROVED FLASH MESSAGES ===== */
+.alert {
+    max-width: 900px;
+    margin: 1rem auto;
+    padding: 1rem 1.25rem;
+    border-radius: 10px;
+    border-left: 5px solid;
+    font-weight: 500;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.alert.success {
+    border-left-color: #28a745;
+}
+
+.alert.error {
+    border-left-color: #dc3545;
+}
+
+.alert.warning {
+    border-left-color: #ffc107;
+}
+
+.alert.info {
+    border-left-color: #17a2b8;
+}
+
+/* ===== EDIT LINKS ===== */
+.edit-link {
+    display: inline-block;
+    margin-top: 1rem;
+    margin-right: 0.75rem;
+    padding: 0.75rem 1.25rem;
+    background-color: #2563eb;
+    color: white;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.edit-link:hover {
+    background-color: #1d4ed8;
+    text-decoration: none;
+}
+
+
+
 
 /* ===== FOOTER ===== */
 footer {
@@ -402,5 +507,13 @@ footer {
 
     .category-tags {
         justify-content: center;
+    }
+
+     .category-checkboxes {
+        grid-template-columns: 1fr;
+    }
+
+    .form-actions {
+        flex-direction: column;
     }
 }
