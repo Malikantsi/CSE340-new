@@ -45,4 +45,59 @@ const getProjectsByCategoryId = async (categoryId) => {
     return result.rows;
 };
 
-export { getAllCategories ,getCategoryById,getProjectsByCategoryId}
+const assignCategoryToProject = async (projectId, categoryId) => {
+    const query = `
+        INSERT INTO project_categories
+        (project_id, category_id)
+        VALUES ($1, $2);
+    `;
+
+    await db.query(query, [projectId, categoryId]);
+};
+
+const getCategoriesByServiceProjectId = async (projectId) => {
+    const query = `
+        SELECT
+            c.category_id,
+            c.category_name
+        FROM categories c
+        JOIN project_categories pc
+            ON c.category_id = pc.category_id
+        WHERE pc.project_id = $1
+        ORDER BY c.category_name;
+    `;
+
+    const result = await db.query(query, [projectId]);
+
+    return result.rows;
+};
+
+
+const updateCategoryAssignments = async (
+    projectId,
+    categoryIds
+) => {
+
+    // Remove all existing category assignments
+    const deleteQuery = `
+        DELETE FROM project_categories
+        WHERE project_id = $1;
+    `;
+
+    await db.query(deleteQuery, [projectId]);
+
+    // Add new assignments
+    for (const categoryId of categoryIds) {
+        await assignCategoryToProject(
+            projectId,
+            categoryId
+        );
+    }
+};
+
+export {
+    getAllCategories
+    , getCategoryById,
+    getProjectsByCategoryId,
+    updateCategoryAssignments,getCategoriesByServiceProjectId 
+}
