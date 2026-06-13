@@ -22,7 +22,9 @@ const showCategoriesPage = async (req, res) => {
     const title = 'Service Categories';
 
     res.render('categories', { title, categories });
-};  
+}; 
+
+
 
 const showCategoryDetailsPage = async (req, res) => {
 

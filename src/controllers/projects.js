@@ -1,6 +1,9 @@
 // Import any needed model functions
 import {
-    getAllProjects, getUpcomingProjects, getProjectDetails, getCategoriesByProjectId, getProjectsByOrganizationId
+    getAllProjects, 
+     getUpcomingProjects,
+       getProjectDetails, 
+        getCategoriesByProjectId, getProjectsByOrganizationId
     } from '../models/projects.js';
 import { body, validationResult } from "express-validator";
 import { createProject, updateProject } from "../models/projects.js";

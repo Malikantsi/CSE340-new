@@ -44,6 +44,16 @@ app.use(express.json());
 // Serve static files from the public directory
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use((req, res, next) => {
+    res.locals.isLoggedIn = false;
+    if (req.session && req.session.user) {
+        res.locals.isLoggedIn = true;
+    }
+
+    res.locals.NODE_ENV = NODE_ENV;
+    next();
+});
+
 // Set EJS as the templating engine
 app.set('view engine', 'ejs');
 
@@ -94,6 +104,7 @@ app.use((err, req, res, next) => {
     // Render the appropriate error template
     res.status(status).render(`errors/${template}`, context);
 });
+
 
 app.listen(PORT, async () => {
   try {

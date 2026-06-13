@@ -19,6 +19,10 @@ const pool = new Pool({
     },
 });
 
+pool.on('error', (err) => {
+    console.error('Unexpected PostgreSQL pool error:', err);
+});
+
 /**
  * Common SSL Issue:
  *
@@ -51,6 +55,7 @@ if (process.env.NODE_ENV === 'development' && process.env.ENABLE_SQL_LOGGING ===
         async query(text, params) {
             try {
                 const start = Date.now();
+                
                 const res = await pool.query(text, params);
                 const duration = Date.now() - start;
                 console.log('Executed query:', { 
@@ -62,15 +67,15 @@ if (process.env.NODE_ENV === 'development' && process.env.ENABLE_SQL_LOGGING ===
             } catch (error) {
                 console.error('Error in query:', { 
                     text: text.replace(/\s+/g, ' ').trim(), 
-                    error: error.message 
+                    error: error 
                 });
                 throw error;
             }
         },
 
-        async close() {
-            await pool.end();
-        }
+        // async close() {
+        //     await pool.end();
+        // }
     };
 } else {
     // In production, export the pool directly without logging overhead

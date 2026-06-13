@@ -1,0 +1,18 @@
+<%- include('partials/header') %>
+
+    <main>
+        <h1>
+            <%= title %>
+        </h1>
+
+        <h2>Dashboard</h2>
+        <p>Name: <%= name %></p>
+        <p>Username: <%= email %></p>
+        <p><% if (role_id==2) { %>
+            <a href="/allusers">Admin Access: Show All Users</a>
+         <% } %>
+        </p>
+
+    </main>
+
+    <%- include('partials/footer') %>

@@ -2,6 +2,17 @@ import express from 'express';
 import { showHomePage } from './controllers/index.js';
 import { showOrganizationsPage } from './controllers/organizations.js';
 import {
+    showUserRegistrationForm,
+    processUserRegistrationForm,
+    showLoginForm,
+    processLoginForm,
+    processLogout,
+    requireLogin,
+    showDashboard,
+    requireAdmin,
+    showUsersPage
+} from './controllers/users.js';
+import {
     showProjectsPage,
     showProjectDetailsPage,
     processNewProjectForm,
@@ -42,6 +53,7 @@ router.get('/organizations', showOrganizationsPage);
 router.get('/projects', showProjectsPage);
 router.get('/categories', showCategoriesPage);
 router.get('/category/:id', showCategoryDetailsPage);
+router.get('/register', showUserRegistrationForm);
 
 // Routes to handle the assign categories to project form
 router.get('/assign-categories/:projectId', showAssignCategoriesForm);
@@ -62,6 +74,7 @@ router.get('/edit-project/:id',showEditProjectForm);
 
 router.post('/edit-project/:id',projectValidation,processEditProjectForm
 );
+router.post('/register', processUserRegistrationForm);
 
 
 
@@ -77,13 +90,18 @@ router.post('/edit-category/:id',categoryValidation,processEditCategoryForm);
 // error-handling routes
 router.get('/test-error', testErrorPage);
 
-
-
-
 // Route for project details page
 router.get('/project/:id', showProjectDetailsPage);
 //add show new project form
 router.get('/new-project', showNewProjectForm);
-router.post('/new-project',projectValidation, processNewProjectForm);
+router.post('/new-project', projectValidation, processNewProjectForm);
+
+// User login routes
+router.get('/login', showLoginForm);
+router.post('/login', processLoginForm);
+router.get('/logout', processLogout);
+
+router.get('/dashboard', requireLogin, showDashboard);
+router.get('/allusers', requireAdmin, showUsersPage);
 
 export default router;
