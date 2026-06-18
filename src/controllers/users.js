@@ -1,6 +1,10 @@
 import bcrypt from 'bcrypt';
 import { createUser, authenticateUser, getAllUsers } from '../models/users.js';
 import router from '../routes.js';
+import { getUserVolunteeredProjects } from '../models/volunteers.js';
+
+
+
 
 const showUserRegistrationForm = (req, res) => {
     res.render('register', { title: 'Register' });
@@ -76,15 +80,82 @@ const requireLogin = (req, res, next) => {
     next();
 };
 
-const showDashboard = (req, res) => {
+/*const showDashboard = async (req, res) => {
+    
+    console.log("=== showDashboard function START ===");
+    
+    try {
+        console.log("1. Checking session user...");
+        const user = req.session.user;
+        console.log("2. User object:", JSON.stringify(user, null, 2));
+        
+        if (!user) {
+            console.log("3. No user found in session!");
+            req.flash('error', 'You must be logged in');
+            return res.redirect('/login');
+        }
+        
+        console.log("4. Calling getVolunteerProjects with user_id:", user.user_id);
+        const volunteerProjects = await getVolunteerProjects(user.user_id);
+        console.log("5. getVolunteerProjects returned:", volunteerProjects);
+        console.log("6. Type of volunteerProjects:", typeof volunteerProjects);
+        console.log("7. Is array?", Array.isArray(volunteerProjects));
+        
+        console.log("8. About to render dashboard...");
+        res.render('dashboard', {
+            title: 'Dashboard',
+            name: user.name,
+            email: user.email,
+            role_id: user.role_id,
+            volunteerProjects: volunteerProjects || []
+        });
+        console.log("9. Dashboard rendered successfully!");
+        
+    } catch (error) {
+        console.error("=== ERROR in showDashboard ===");
+        console.error("Error message:", error.message);
+        console.error("Error stack:", error.stack);
+        
+        // IMPORTANT: DO NOT throw the error again!
+        // Send a response instead
+        console.log("Sending fallback response...");
+        
+        // Try to render with default values
+        try {
+            res.render('dashboard', {
+                title: 'Dashboard',
+                name: req.session.user?.name || 'User',
+                email: req.session.user?.email || '',
+                role_id: req.session.user?.role_id || 1,
+                volunteerProjects: []  // Empty array as fallback
+            });
+        } catch (renderError) {
+            console.error("Fallback render also failed:", renderError);
+            res.status(500).send("Unable to load dashboard");
+        }
+    }
+    
+    console.log("=== showDashboard function END ===");
+};*/
+
+const showDashboard = async (req, res) => {
+
     const user = req.session.user;
-    res.render('dashboard', { 
-        title: 'Dashboard',
+
+    const volunteerProjects = await getUserVolunteeredProjects(user.user_id);
+
+    return res.render('dashboard', {
+        title: 'THIS IS THE NEW DASHBOARD',
         name: user.name,
         email: user.email,
-        role_id: user.role_id
+        role_id: user.role_id,
+        testVariable: 'HELLO',
+        volunteerProjects
     });
 };
+
+
+
 
 const requireAdmin = (req, res, next) => {
      req.flash('error', req.session.user.role_id);

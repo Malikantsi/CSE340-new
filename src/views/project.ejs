@@ -34,25 +34,36 @@
                 <%= project.organization_name %>
             </a>
         </p>
-        <h3>Categories</h3>
-        
-        <div class="category-tags">
-        
-            <% categories.forEach(category=> { %>
-        
-                <a class="category-tag" href="/category/<%= category.category_id %>">
-                    <%= category.category_name %>
-                </a>
-        
-                <% }) %>
-        
-        </div>
-        <p>
-            <a class="edit-link" href="/assign-categories/<%= project.project_id %>">
-                Edit Categories
-            </a>
-        </p>
 
+<!-- Volunteer Section -->
+
+        <% if (isLoggedIn) { %>
+
+            <% if (!userIsVolunteer) { %>
+
+                <form action="/project/<%= project.project_id %>/volunteer" method="POST">
+                    <button type="submit">
+                        Volunteer for this Project
+                    </button>
+                </form>
+
+                <% } else { %>
+                    <p>
+                        You are volunteering for this project.
+                    </p>
+
+                    <form action="/project/<%= project.project_id %>/unvolunteer" method="POST">
+                        <button type="submit">
+                            Stop Volunteering
+                        </button>
+                    </form>
+
+            <% } %>
+
+        <% } %>
+
+
+<!-- End of Section -->
     </main>
 
     <%- include('partials/footer') %>

@@ -44,6 +44,10 @@ import {
     showEditOrganizationForm
 } from './controllers/organizations.js';
 
+import {
+    volunteerForProject,
+    unvolunteerForProject
+} from "./controllers/volunteers.js";
 
 
 const router = express.Router();
@@ -58,6 +62,19 @@ router.get('/register', showUserRegistrationForm);
 // Routes to handle the assign categories to project form
 router.get('/assign-categories/:projectId', showAssignCategoriesForm);
 router.post('/assign-categories/:projectId', processAssignCategoriesForm);
+
+
+router.post(
+    "/project/:id/volunteer",
+    requireLogin,
+    volunteerForProject
+);
+
+router.post(
+    "/project/:id/unvolunteer",
+    requireLogin,
+    unvolunteerForProject
+);
 
 // Route for new organization page
 router.get('/new-organization', showNewOrganizationForm);
@@ -96,12 +113,16 @@ router.get('/project/:id', showProjectDetailsPage);
 router.get('/new-project', showNewProjectForm);
 router.post('/new-project', projectValidation, processNewProjectForm);
 
+
 // User login routes
 router.get('/login', showLoginForm);
 router.post('/login', processLoginForm);
 router.get('/logout', processLogout);
 
+
 router.get('/dashboard', requireLogin, showDashboard);
 router.get('/allusers', requireAdmin, showUsersPage);
+
+
 
 export default router;

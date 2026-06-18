@@ -1,6 +1,6 @@
 <%- include('partials/header') %>
-
     <main>
+
         <h1>
             <%= title %>
         </h1>
@@ -12,6 +12,36 @@
             <a href="/allusers">Admin Access: Show All Users</a>
          <% } %>
         </p>
+
+
+        <h3>Projects I'm Volunteering For</h3>
+        
+        <% if (volunteerProjects.length===0) { %>
+        
+            <p>You have not volunteered for any projects yet.</p>
+        
+            <% } else { %>
+        
+                <ul>
+                    <% volunteerProjects.forEach(project=> { %>
+        
+                        <li>
+                            <strong>
+                                <%= project.title %>
+                            </strong>
+                            (<%= project.location %>)
+        
+                                <form action="/project/<%= project.project_id %>/unvolunteer" method="POST"
+                                    style="display:inline;">
+                                    <button type="submit">Remove</button>
+                                </form>
+                        </li>
+        
+                        <% }) %>
+                </ul>
+        
+                <% } %>
+
 
     </main>
 

@@ -8,6 +8,8 @@ import {
 import { body, validationResult } from "express-validator";
 import { createProject, updateProject } from "../models/projects.js";
 import { getAllOrganizations } from "../models/organizations.js";
+import { isVolunteer } from "../models/volunteers.js";
+
 
 
 const NUMBER_OF_UPCOMING_PROJECTS = 5;
@@ -53,14 +55,29 @@ const projectValidation = [
 const showProjectDetailsPage = async (req, res) => {
 
     const projectId = req.params.id;
-    const project = await getProjectDetails(projectId);
-    const categories = await getCategoriesByProjectId(projectId);
-    const title = 'Project Details';
 
-    res.render('project', {
-        title,
+    const project =
+        await getProjectDetails(projectId);
+
+    const categories =
+        await getCategoriesByProjectId(projectId);
+
+    let userIsVolunteer = false;
+
+    if (req.session?.user) {
+
+        userIsVolunteer =
+            await isVolunteer(
+                req.session.user.user_id,
+                projectId
+            );
+    }
+
+    res.render("project", {
+        title: "Project Details",
         project,
-        categories
+        categories,
+        userIsVolunteer
     });
 };
 

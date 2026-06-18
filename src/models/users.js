@@ -47,7 +47,7 @@ const verifyPassword = async (password, passwordHash) => {
 const authenticateUser = async (email, password) => {
     // Find the user by email
     const user = await findUserByEmail(email);
-
+    
     // Return null if no user exists
     if (!user) {
         return null;
